@@ -1,21 +1,26 @@
-import express, { Application } from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
+import express, { Application } from 'express'
+import cors from 'cors'
+import dotenv from 'dotenv'
+import mongoose from 'mongoose'
 
-const app: Application = express();
+const app: Application = express()
 
-const port: String | Number = process.env.PORT || 5000;
+const port: string | number = process.env.PORT || 5000
+
+// dotenv config
+dotenv.config()
 
 // middleware
-app.use(express.json());
-app.use(cors());
+app.use(express.json())
+app.use(cors())
 
-const runningServer = (): void => {
+const runningServer = async (): Promise<void> => {
   try {
-    app.listen(port, () => console.log("Server is running well"));
+    await mongoose.connect(process.env.MONGODB_URL as string)
+
+    app.listen(port, () => console.log('Mongo db is connected'))
   } catch (error) {
-    console.log("error: ", error);
+    console.log('error: ', error)
   }
-};
-runningServer();
+}
+runningServer()
