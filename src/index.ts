@@ -1,15 +1,15 @@
 import express, { Application, Request, Response } from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
+
 import mongoose from 'mongoose'
 import { createUser } from '../src/modules/app/user/user.service'
 import userRouter from '../src/modules/app/user/user.route'
 const app: Application = express()
 
-const port: string | number = process.env.PORT || 5000
-
 // dotenv config
 dotenv.config()
+const port: string | number = process.env.PORT || 5000
 
 // middleware
 app.use(express.json())
@@ -39,8 +39,10 @@ const runningServer = async (): Promise<void> => {
       res.send({ result: newUser })
     })
 
+    // eslint-disable-next-line no-console
     app.listen(port, () => console.log('Mongo db is connected'))
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.log('error: ', error)
   }
 }
