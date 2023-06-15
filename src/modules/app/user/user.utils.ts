@@ -11,13 +11,11 @@ export const getNextId = (arr: IUser[]): string => {
   return biggestId.id.padStart(5, '0')
 }
 
-
 // if you know you got last user and sort by last createAt by mongoDb
 export const getUserId = (id: string): string => {
   const newId = (parseInt(id) + 1).toString()
   return newId.padStart(5, '0')
 }
-
 
 // find last user
 export const findLastUserId = async (): Promise<string | undefined> => {

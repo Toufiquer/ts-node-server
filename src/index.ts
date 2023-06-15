@@ -3,6 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import { createUser } from '../src/modules/app/user/user.service'
+import userRouter from '../src/modules/app/user/user.route'
 const app: Application = express()
 
 const port: string | number = process.env.PORT || 5000
@@ -21,6 +22,9 @@ const runningServer = async (): Promise<void> => {
     app.get('/', (req: Request, res: Response) => {
       res.send({ message: 'Server is running' })
     })
+
+    // Application route
+    app.use('/api/v1/user', userRouter)
 
     app.get('/addUser', async (req: Request, res: Response) => {
       const newUser = await createUser({
